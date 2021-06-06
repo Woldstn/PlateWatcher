@@ -24,13 +24,17 @@ struct ContentView: View {
                             ).listRowInsets(EdgeInsets())
                     ) {
                         let dayGoals = getGoals(period: .day)
-                        ForEach(dayGoals, id: \.self) { goal in
-                            NutrientRow(goal: goal)
+                        if dayGoals.count == 0 {
+                            Text("日間ゴールはまだありません。")
+                        } else {
+                            ForEach(dayGoals, id: \.self) { goal in
+                                NutrientRow(goal: goal)
+                            }
+                            .onDelete(perform: { indexSet in
+                                deleteGoals(at: indexSet, goals: dayGoals)
+                            })
+                            .listRowInsets(EdgeInsets())
                         }
-                        .onDelete(perform: { indexSet in
-                            deleteGoals(at: indexSet, goals: dayGoals)
-                        })
-                        .listRowInsets(EdgeInsets())
                     }
                     Section(
                         header:
@@ -40,13 +44,17 @@ struct ContentView: View {
                             ).listRowInsets(EdgeInsets())
                     ) {
                         let weekGoals = getGoals(period: .week)
-                        ForEach(weekGoals, id: \.self) { goal in
-                            NutrientRow(goal: goal)
+                        if weekGoals.count == 0 {
+                            Text("週間ゴールはまだありません。")
+                        } else {
+                            ForEach(weekGoals, id: \.self) { goal in
+                                NutrientRow(goal: goal)
+                            }
+                            .onDelete(perform: { indexSet in
+                                deleteGoals(at: indexSet, goals: weekGoals)
+                            })
+                            .listRowInsets(EdgeInsets())
                         }
-                        .onDelete(perform: { indexSet in
-                            deleteGoals(at: indexSet, goals: weekGoals)
-                        })
-                        .listRowInsets(EdgeInsets())
                     }
                     Section(
                         header:
@@ -56,13 +64,17 @@ struct ContentView: View {
                             ).listRowInsets(EdgeInsets())
                     ) {
                         let monthGoals = getGoals(period: .month)
-                        ForEach(monthGoals, id: \.self) { goal in
-                            NutrientRow(goal: goal)
+                        if monthGoals.count == 0 {
+                            Text("月間ゴールはまだありません。")
+                        } else {
+                            ForEach(monthGoals, id: \.self) { goal in
+                                NutrientRow(goal: goal)
+                            }
+                            .onDelete(perform: { indexSet in
+                                deleteGoals(at: indexSet, goals: monthGoals)
+                            })
+                            .listRowInsets(EdgeInsets())
                         }
-                        .onDelete(perform: { indexSet in
-                            deleteGoals(at: indexSet, goals: monthGoals)
-                        })
-                        .listRowInsets(EdgeInsets())
                     }
                 }.listStyle(PlainListStyle())
             }.navigationBarTitle("飲食記録")
@@ -106,6 +118,11 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let dateData = DateData(context: context)
-        return ContentView(dateData: dateData).environment(\.managedObjectContext, context)
+        return Group {
+            ContentView(dateData: dateData).environment(\.managedObjectContext, context)
+            ContentView(dateData: dateData)
+                .environment(\.managedObjectContext, context)
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

@@ -161,6 +161,9 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        return MainView().environment(\.managedObjectContext, context)
+        return Group {
+            MainView().environment(\.managedObjectContext, context)
+            MainView().environment(\.managedObjectContext, context).environment(\.colorScheme, .dark)
+        }
     }
 }

@@ -172,6 +172,9 @@ struct AddGoalForm_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let dateData = DateData(context: context)
         let mainView = MainView()
-        AddGoalForm(parent: mainView, dateData: dateData)
+        Group {
+            AddGoalForm(parent: mainView, dateData: dateData)
+            AddGoalForm(parent: mainView, dateData: dateData).environment(\.colorScheme, .dark)
+        }
     }
 }
