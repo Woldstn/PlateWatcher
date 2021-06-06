@@ -43,3 +43,49 @@ enum GoalType: Int16, CaseIterable {
         }
     }
 }
+
+enum Weekdays: Int, CaseIterable {
+    case sun = 1, mon, tue, wed, thu, fri, sat
+    
+    func string() -> String {
+        switch self {
+        case .sun:
+            return "日曜日"
+        case .mon:
+            return "月曜日"
+        case .tue:
+            return "火曜日"
+        case .wed:
+            return "水曜日"
+        case .thu:
+            return "木曜日"
+        case .fri:
+            return "金曜日"
+        case .sat:
+            return "土曜日"
+        }
+    }
+}
+
+enum DataPeriod: Int, CaseIterable {
+    case oneWeek = 1, twoWeeks, oneMonth, sixMonths, oneYear, twoYears, forever
+    
+    func string() -> String {
+        switch self {
+        case .oneWeek:
+            return "1週間"
+        case .twoWeeks:
+            return "2週間"
+        case .oneMonth:
+            return "1ヶ月"
+        case .sixMonths:
+            return "2ヶ月"
+        case .oneYear:
+            return "1年間"
+        case .twoYears:
+            return "2年間"
+        case .forever:
+            return "永久に"
+        }
+    }
+}

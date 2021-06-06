@@ -38,12 +38,12 @@ struct MainView: View {
     init() {
         UINavigationBar.appearance().backgroundColor = UIColor(named: "TitleColor")
         let userSettings = UserDefaults.standard
-        let startWeekday = userSettings.string(forKey: "start weekday")
-        if startWeekday == nil {userSettings.set("日曜日", forKey: "start weekday")}
+        let startWeekday = userSettings.integer(forKey: "start weekday")
+        if startWeekday == 0 {userSettings.set(1, forKey: "start weekday")}
         let startDate = userSettings.integer(forKey: "month start")
         if startDate == 0 {userSettings.set(1, forKey: "month start")}
-        let dataPeriod = userSettings.string(forKey: "data period")
-        if dataPeriod == nil {userSettings.set("2週間", forKey: "data period")}
+        let dataPeriod = userSettings.integer(forKey: "data period")
+        if dataPeriod == 0 {userSettings.set(2, forKey: "data period")}
     }
     
     @Environment(\.managedObjectContext) var managedObjectContext

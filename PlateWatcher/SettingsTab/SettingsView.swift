@@ -15,9 +15,9 @@ struct SettingsView: View {
     @State private var showingDataSaveNotification = false
     @State private var showingDefaultSettingsAlert = false
     @State private var showingDataDeletionAlert = false
-    @State var startWeekday = UserDefaults.standard.string(forKey: "start weekday")
-    @State var startDate = UserDefaults.standard.integer(forKey: "month start")
-    @State var dataPeriod = UserDefaults.standard.string(forKey: "data period")
+    @State var startWeekday = UserDefaults.standard.integer(forKey: "start weekday")
+    @State var monthStart = UserDefaults.standard.integer(forKey: "month start")
+    @State var dataPeriod = UserDefaults.standard.integer(forKey: "data period")
     var userSettings = UserDefaults.standard
     
     @FetchRequest(
@@ -40,7 +40,7 @@ struct SettingsView: View {
                         HStack {
                             Text("週の初曜日")
                             Spacer()
-                            Text(startWeekday ?? "日曜日")
+                            Text("\(Weekdays.init(rawValue: startWeekday)?.string() ?? "")")
                             Text("⤵︎").foregroundColor(Color.gray)
                         }.onTapGesture {
                             self.showingWeekdaySelection = true
@@ -48,32 +48,23 @@ struct SettingsView: View {
                             ActionSheet(
                                 title: Text("週の初曜日"),
                                 message: nil,
-                                buttons: [
-                                    .default(Text("日曜日"), action: {startWeekday = "日曜日"}),
-                                    .default(Text("月曜日"), action: {startWeekday = "月曜日"}),
-                                    .default(Text("火曜日"), action: {startWeekday = "火曜日"}),
-                                    .default(Text("水曜日"), action: {startWeekday = "水曜日"}),
-                                    .default(Text("木曜日"), action: {startWeekday = "木曜日"}),
-                                    .default(Text("金曜日"), action: {startWeekday = "金曜日"}),
-                                    .default(Text("土曜日"), action: {startWeekday = "土曜日"}),
-                                    .cancel()
-                                ]
+                                buttons: getWeekdayButtons()
                             )
                         }
                         Stepper(
-                            onIncrement: {if startDate < 31 {startDate += 1}},
-                            onDecrement: {if startDate > 1 {startDate -= 1}}
+                            onIncrement: {if monthStart < 31 {monthStart += 1}},
+                            onDecrement: {if monthStart > 1 {monthStart -= 1}}
                         ) {
                             HStack {
                                 Text("月の初日")
                                 Spacer()
-                                Text("\(startDate)")
+                                Text("\(monthStart)")
                             }
                         }
                         HStack {
                             Text("データ保存期間")
                             Spacer()
-                            Text(dataPeriod ?? "2週間")
+                            Text("\(DataPeriod.init(rawValue: dataPeriod)?.string() ?? "")")
                             Text("⤵︎").foregroundColor(Color.gray)
                         }.onTapGesture {
                             self.showingDataKeepPeriod = true
@@ -81,16 +72,7 @@ struct SettingsView: View {
                             ActionSheet(
                                 title: Text("データ保存期間"),
                                 message: nil,
-                                buttons: [
-                                    .default(Text("1週間"), action: {dataPeriod = "1週間"}),
-                                    .default(Text("2週間"), action: {dataPeriod = "2週間"}),
-                                    .default(Text("1ヶ月"), action: {dataPeriod = "1ヶ月"}),
-                                    .default(Text("6ヶ月"), action: {dataPeriod = "6ヶ月"}),
-                                    .default(Text("1年間"), action: {dataPeriod = "1年間"}),
-                                    .default(Text("2年間"), action: {dataPeriod = "2年間"}),
-                                    .default(Text("永久に"), action: {dataPeriod = "永久に"}),
-                                    .cancel()
-                                ]
+                                buttons: getDataPeriodButtons()
                             )
                         }
                     }
@@ -177,18 +159,38 @@ struct SettingsView: View {
         }
     }
     
+    func getWeekdayButtons() -> [ActionSheet.Button] {
+        var buttons: [ActionSheet.Button] = []
+        for day in Weekdays.allCases {
+            let button = ActionSheet.Button.default(Text(day.string()), action: {startWeekday = day.rawValue})
+            buttons.append(button)
+        }
+        buttons.append(ActionSheet.Button.cancel())
+        return buttons
+    }
+    
+    func getDataPeriodButtons() -> [ActionSheet.Button] {
+        var buttons: [ActionSheet.Button] = []
+        for pd in DataPeriod.allCases {
+            let button = ActionSheet.Button.default(Text(pd.string()), action: {dataPeriod = pd.rawValue})
+            buttons.append(button)
+        }
+        buttons.append(ActionSheet.Button.cancel())
+        return buttons
+    }
+    
     func saveSettings() {
         userSettings.set(startWeekday, forKey: "start weekday")
-        userSettings.set(startDate, forKey: "month start")
+        userSettings.set(monthStart, forKey: "month start")
         userSettings.set(dataPeriod, forKey: "data period")
         showingDataSaveNotification = true
         parent.selectedTab = "home"
     }
     
     func discardChanges() {
-        startWeekday = userSettings.string(forKey: "start weekday")
-        startDate = userSettings.integer(forKey: "month start")
-        dataPeriod = userSettings.string(forKey: "data period")
+        startWeekday = userSettings.integer(forKey: "start weekday")
+        monthStart = userSettings.integer(forKey: "month start")
+        dataPeriod = userSettings.integer(forKey: "data period")
         parent.selectedTab = "home"
     }
     
@@ -196,9 +198,9 @@ struct SettingsView: View {
         userSettings.set("日曜日", forKey: "start weekday")
         userSettings.set(1, forKey: "month start")
         userSettings.set("2週間", forKey: "data period")
-        startWeekday = "日曜日"
-        startDate = 1
-        dataPeriod = "2週間"
+        startWeekday = 1
+        monthStart = 1
+        dataPeriod = 2
         parent.selectedTab = "home"
     }
     
