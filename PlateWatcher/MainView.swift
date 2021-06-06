@@ -10,11 +10,13 @@ import SwiftUI
 
 extension Calendar {
     func startOfWeek(for date: Date) -> Date? {
+        var weekday = UserDefaults.standard.integer(forKey: "start weekday")
+        if weekday == 0 { weekday = 1 }
         return Calendar.current.startOfDay(for: self.nextDate(
             after: self.startOfDay(for: date),
             matching: DateComponents(
                 calendar: self,
-                weekday: 1
+                weekday: weekday
             ),
             matchingPolicy: .previousTimePreservingSmallerComponents,
             direction: .backward
@@ -22,11 +24,13 @@ extension Calendar {
     }
     
     func startOfMonth(for date: Date) -> Date? {
+        var day = UserDefaults.standard.integer(forKey: "month start")
+        if day == 0 { day = 1 }
         return Calendar.current.startOfDay(for: self.nextDate(
             after: self.startOfDay(for: date),
             matching: DateComponents(
                 calendar: self,
-                day: 1
+                day: day
             ),
             matchingPolicy: .previousTimePreservingSmallerComponents,
             direction: .backward
