@@ -1,6 +1,7 @@
 # PlateWatcher
 
 A simple nutrition app for tracking servings throughout days, weeks, or months.
+This is basically an experiment to learn about app development using Xcode and Swift.
 
 ### Current status
 - Goals can be set to track different nutrition items
