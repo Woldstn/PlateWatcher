@@ -106,17 +106,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E207D30266C8D3700D9FCC9 /* ContentView */ = {
-			isa = PBXGroup;
-			children = (
-				3E340E6E24E2CE7E0044100D /* ResetButton.swift */,
-				3E340E6C24E2CE220044100D /* SectionHeader.swift */,
-				3E340E4024E2AAFE0044100D /* ContentView.swift */,
-				3E340E7424E2D66C0044100D /* NutrientRow.swift */,
-			);
-			path = ContentView;
-			sourceTree = "<group>";
-		};
 		3E207D31266C8DD800D9FCC9 /* NewGoalTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,10 +155,10 @@
 		3E340E3824E2AAFE0044100D /* PlateWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				3E58644C266CA99900BCA5DB /* HomeTab */,
 				3E207D33266C8E5800D9FCC9 /* SettingsTab */,
 				3E207D32266C8E1B00D9FCC9 /* GraphTab */,
 				3E207D31266C8DD800D9FCC9 /* NewGoalTab */,
-				3E207D30266C8D3700D9FCC9 /* ContentView */,
 				3E340E3924E2AAFE0044100D /* AppDelegate.swift */,
 				3E340E3B24E2AAFE0044100D /* SceneDelegate.swift */,
 				3EE815A226619D0F00BDEE1A /* PlateWatcher.xcdatamodeld */,
@@ -211,6 +200,17 @@
 				3E340E6024E2AB050044100D /* Info.plist */,
 			);
 			path = PlateWatcherUITests;
+			sourceTree = "<group>";
+		};
+		3E58644C266CA99900BCA5DB /* HomeTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E340E6E24E2CE7E0044100D /* ResetButton.swift */,
+				3E340E6C24E2CE220044100D /* SectionHeader.swift */,
+				3E340E4024E2AAFE0044100D /* ContentView.swift */,
+				3E340E7424E2D66C0044100D /* NutrientRow.swift */,
+			);
+			path = HomeTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
