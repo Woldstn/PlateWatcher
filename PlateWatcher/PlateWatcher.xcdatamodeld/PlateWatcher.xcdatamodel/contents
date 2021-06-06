@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DateData" representedClassName="DateData" syncable="YES" codeGenerationType="class">
+        <attribute name="datetime" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="goals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Goal" inverseName="date" inverseEntity="Goal"/>
+    </entity>
+    <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
+        <attribute name="goal" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalPeriod" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="goalType" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="servings" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="date" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateData" inverseName="goals" inverseEntity="DateData"/>
+    </entity>
+    <elements>
+        <element name="DateData" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Goal" positionX="-54" positionY="0" width="128" height="134"/>
+    </elements>
+</model>
