@@ -9,10 +9,10 @@
 import SwiftUI
 
 extension Calendar {
-    func startOfWeek(for date: Date) -> Date? {
+    func startOfWeek(for date: Date) -> Date {
         var weekday = UserDefaults.standard.integer(forKey: "start weekday")
         if weekday == 0 { weekday = 1 }
-        return Calendar.current.startOfDay(for: self.nextDate(
+        return self.startOfDay(for: self.nextDate(
             after: self.startOfDay(for: date),
             matching: DateComponents(
                 calendar: self,
@@ -23,10 +23,10 @@ extension Calendar {
         )!)
     }
     
-    func startOfMonth(for date: Date) -> Date? {
+    func startOfMonth(for date: Date) -> Date {
         var day = UserDefaults.standard.integer(forKey: "month start")
         if day == 0 { day = 1 }
-        return Calendar.current.startOfDay(for: self.nextDate(
+        return self.startOfDay(for: self.nextDate(
             after: self.startOfDay(for: date),
             matching: DateComponents(
                 calendar: self,
@@ -112,6 +112,7 @@ struct MainView: View {
                 switch GoalPeriod(rawValue: newGoal.goalPeriod) {
                 case .day:
                     newGoal.servings = 0
+                    break
                 case .week:
                     if let sourceDate = sourceDateData.datetime {
                         let sourceWeek = Calendar.current.startOfWeek(for: sourceDate)
@@ -120,6 +121,7 @@ struct MainView: View {
                             newGoal.servings = 0
                         }
                     }
+                    break
                 case .month:
                     if let sourceDate = sourceDateData.datetime {
                         let sourceMonth = Calendar.current.startOfMonth(for: sourceDate)
@@ -128,6 +130,7 @@ struct MainView: View {
                             newGoal.servings = 0
                         }
                     }
+                    break
                 case .none:
                     break
                 }
@@ -162,8 +165,11 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return Group {
-            MainView().environment(\.managedObjectContext, context)
-            MainView().environment(\.managedObjectContext, context).environment(\.colorScheme, .dark)
+            MainView()
+                .environment(\.managedObjectContext, context)
+            MainView()
+                .environment(\.managedObjectContext, context)
+                .environment(\.colorScheme, .dark)
         }
     }
 }

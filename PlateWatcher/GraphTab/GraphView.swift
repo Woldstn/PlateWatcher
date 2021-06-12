@@ -8,7 +8,6 @@
 
 import CoreData
 import SwiftUI
-import SwiftUICharts
 
 struct GraphView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -53,7 +52,7 @@ struct GraphView: View {
                 List {
                     
                 }
-            }.navigationBarTitle("チャート")
+            }.navigationTitle("chart-header")
         }
     }
     

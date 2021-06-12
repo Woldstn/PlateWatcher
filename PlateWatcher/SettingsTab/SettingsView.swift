@@ -38,15 +38,15 @@ struct SettingsView: View {
                 Form {
                     Section {
                         HStack {
-                            Text("週の初曜日")
+                            Text("start-of-week")
                             Spacer()
-                            Text("\(Weekdays.init(rawValue: startWeekday)?.string() ?? "")")
+                            Text(LocalizedStringKey(Weekdays.init(rawValue: startWeekday)?.key() ?? "sunday"))
                             Text("⤵︎").foregroundColor(Color.gray)
                         }.onTapGesture {
                             self.showingWeekdaySelection = true
                         }.actionSheet(isPresented: $showingWeekdaySelection) {
                             ActionSheet(
-                                title: Text("週の初曜日"),
+                                title: Text("start-of-week"),
                                 message: nil,
                                 buttons: getWeekdayButtons()
                             )
@@ -56,21 +56,21 @@ struct SettingsView: View {
                             onDecrement: {if monthStart > 1 {monthStart -= 1}}
                         ) {
                             HStack {
-                                Text("月の初日")
+                                Text("start-of-month")
                                 Spacer()
                                 Text("\(monthStart)")
                             }
                         }
                         HStack {
-                            Text("データ保存期間")
+                            Text("data-period-label")
                             Spacer()
-                            Text("\(DataPeriod.init(rawValue: dataPeriod)?.string() ?? "")")
+                            Text(LocalizedStringKey(DataPeriod.init(rawValue: dataPeriod)?.key() ?? "two-weeks"))
                             Text("⤵︎").foregroundColor(Color.gray)
                         }.onTapGesture {
                             self.showingDataKeepPeriod = true
                         }.actionSheet(isPresented: $showingDataKeepPeriod) {
                             ActionSheet(
-                                title: Text("データ保存期間"),
+                                title: Text("data-period-label"),
                                 message: nil,
                                 buttons: getDataPeriodButtons()
                             )
@@ -82,7 +82,7 @@ struct SettingsView: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("変更を保存")
+                                    Text("save-changes")
                                     Spacer()
                                 }
                             }
@@ -90,8 +90,8 @@ struct SettingsView: View {
                             isPresented: $showingDataSaveNotification,
                             content: {
                                 Alert(
-                                    title: Text("成功"),
-                                    message: Text("設定変更を終了しました。")
+                                    title: Text("save-alert-title"),
+                                    message: Text("save-alert-msg")
                                 )
                             }
                         )
@@ -100,7 +100,8 @@ struct SettingsView: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("変更を破棄").foregroundColor(.orange)
+                                    Text("discard-changes")
+                                        .foregroundColor(.orange)
                                     Spacer()
                                 }
                             }
@@ -112,7 +113,7 @@ struct SettingsView: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("設置を初期化").foregroundColor(.red)
+                                    Text("reset-settings").foregroundColor(.red)
                                     Spacer()
                                 }
                             }
@@ -120,13 +121,13 @@ struct SettingsView: View {
                             isPresented: $showingDefaultSettingsAlert,
                             content: {
                                 Alert(
-                                    title: Text("注意"),
-                                    message: Text("設定は初期化されます。よろしいでしょうか？"),
+                                    title: Text("alert-title"),
+                                    message: Text("reset-alert"),
                                     primaryButton: .destructive(
-                                        Text("初期化"),
+                                        Text("reset-settings-button"),
                                         action: setToDefault
                                     ),
-                                    secondaryButton: .cancel(Text("キャンセル"))
+                                    secondaryButton: .cancel(Text("cancel-button"))
                                 )
                             }
                         )
@@ -135,7 +136,7 @@ struct SettingsView: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("データを削除").foregroundColor(.red)
+                                    Text("delete-data").foregroundColor(.red)
                                     Spacer()
                                 }
                             }
@@ -143,39 +144,43 @@ struct SettingsView: View {
                             isPresented: $showingDataDeletionAlert,
                             content: {
                                 Alert(
-                                    title: Text("注意"),
-                                    message: Text("保存されたデータは全部削除されます。よろしいでしょうか？"),
+                                    title: Text("alert-title"),
+                                    message: Text("delete-data-alert"),
                                     primaryButton: .destructive(
-                                        Text("削除"),
+                                        Text("delete-data-button"),
                                         action: deleteAllDateData
                                     ),
-                                    secondaryButton: .cancel(Text("キャンセル"))
+                                    secondaryButton: .cancel(Text("cancel-button"))
                                 )
                             }
                         )
                     }
                 }
-            }.navigationBarTitle("設定")
+            }.navigationTitle("settings-header")
         }
     }
     
     func getWeekdayButtons() -> [ActionSheet.Button] {
         var buttons: [ActionSheet.Button] = []
         for day in Weekdays.allCases {
-            let button = ActionSheet.Button.default(Text(day.string()), action: {startWeekday = day.rawValue})
-            buttons.append(button)
+            buttons.append(.default(
+                Text(LocalizedStringKey(day.key())),
+                action: {startWeekday = day.rawValue}
+            ))
         }
-        buttons.append(ActionSheet.Button.cancel())
+        buttons.append(.cancel())
         return buttons
     }
     
     func getDataPeriodButtons() -> [ActionSheet.Button] {
         var buttons: [ActionSheet.Button] = []
         for pd in DataPeriod.allCases {
-            let button = ActionSheet.Button.default(Text(pd.string()), action: {dataPeriod = pd.rawValue})
-            buttons.append(button)
+            buttons.append(.default(
+                Text(LocalizedStringKey(pd.key())),
+                action: {dataPeriod = pd.rawValue}
+            ))
         }
-        buttons.append(ActionSheet.Button.cancel())
+        buttons.append(.cancel())
         return buttons
     }
     
@@ -195,9 +200,9 @@ struct SettingsView: View {
     }
     
     func setToDefault() {
-        userSettings.set("日曜日", forKey: "start weekday")
+        userSettings.set(1, forKey: "start weekday")
         userSettings.set(1, forKey: "month start")
-        userSettings.set("2週間", forKey: "data period")
+        userSettings.set(2, forKey: "data period")
         startWeekday = 1
         monthStart = 1
         dataPeriod = 2
@@ -222,7 +227,8 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SettingsView(parent: MainView())
-            SettingsView(parent: MainView()).environment(\.colorScheme, .dark)
+            SettingsView(parent: MainView())
+                .environment(\.colorScheme, .dark)
         }
     }
 }

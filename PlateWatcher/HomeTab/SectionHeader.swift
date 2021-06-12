@@ -14,10 +14,13 @@ struct SectionHeader: View {
     
     var body: some View {
         HStack {
-            Text(title).font(.title).fontWeight(.bold)
+            Text(LocalizedStringKey(title))
+                .font(.title)
+                .fontWeight(.bold)
+                .lineLimit(1)
             Spacer()
             Button(action: reset) {
-                Text("リセット")
+                Text("reset-button")
             }.buttonStyle(ResetButton())
         }
         .padding(.all, 5.0)
@@ -28,6 +31,6 @@ struct SectionHeader: View {
 
 struct SectionHeader_Previews: PreviewProvider {
     static var previews: some View {
-        SectionHeader(title: "日間ゴール", reset: {print("reset")})
+        SectionHeader(title: "daily-goals", reset: {print("reset")})
     }
 }

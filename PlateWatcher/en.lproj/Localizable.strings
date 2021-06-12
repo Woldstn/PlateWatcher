@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  PlateWatcher
+
+  Created by Zachary Pierog on 2021/06/12.
+  Copyright © 2021 Zachary Pierog. All rights reserved.
+*/
+
+"PlateWatcher" = "PlateWatcher";
+"daily-goals" = "Daily Goals";
+"weekly-goals" = "Weekly Goals";
+"monthly-goals" = "Monthly Goals";
+"no-daily-goal-msg" = "You currently have no daily goals.";
+"no-weekly-goal-msg" = "You currently have no weekly goals.";
+"no-monthly-goal-msg" = "You currently have no monthly goals.";
+"new-goal-header" = "New Goal";
+"title-label" = "Title";
+"period-label" = "Period";
+"day-period" = "Daily";
+"week-period" = "Weekly";
+"month-period" = "Monthly";
+"type-label" = "Type";
+"serving-label" = "Servings";
+"image-select" = "Select an image";
+"title-alert-label" = "No title";
+"title-alert-msg" = "New goals must have a title.";
+"create-goal-button" = "Create new goal";
+"cancel-button" = "Cancel";
+"image-header" = "Image";
+"chart-header" = "Chart";
+"settings-header" = "Settings";
+"start-of-week" = "Start of week";
+"sunday" = "Sunday";
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"start-of-month" = "Start of month";
+"data-period-label" = "Keep data for:";
+"one-week" = "One week";
+"two-weeks" = "Two weeks";
+"one-month" = "One month";
+"six-months" = "Six months";
+"one-year" = "One year";
+"two-years" = "Two years";
+"forever" = "Forever";
+"save-changes" = "Save changes";
+"save-alert-title" = "Success";
+"save-alert-msg" = "Settings saved successfully.";
+"discard-changes" = "Discard changes";
+"alert-title" = "Warning";
+"reset-settings" = "Reset to default settings";
+"reset-alert" = "Settings will be reset to their default values. Proceed?";
+"reset-settings-button" = "Reset";
+"delete-data" = "Delete all data";
+"delete-data-button" = "Delete";
+"delete-data-alert" = "All saved data will be deleted. Proceed?";
+"reset-button" = "Reset";

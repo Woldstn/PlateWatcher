@@ -27,28 +27,28 @@ struct AddGoalForm: View {
         NavigationView {
             VStack (spacing: 0) {
                 Form {
-                    TextField("タイトル", text: $title)
+                    TextField("title-label", text: $title)
                     HStack {
-                        Text("期間")
+                        Text("period-label")
                         Spacer()
-                        Text("\(self.goalPeriod.string())")
+                        Text(LocalizedStringKey(self.goalPeriod.key()))
                         Text("⤵︎").foregroundColor(Color.gray)
                     }.onTapGesture {
                         self.showingPeriodPicker = true
                     }.actionSheet(isPresented: $showingPeriodPicker) {
                         ActionSheet(
-                            title: Text("期間"),
+                            title: Text("period-label"),
                             message: nil,
                             buttons: [
-                                .default(Text("日間")) {self.goalPeriod = .day},
-                                .default(Text("週間")) {self.goalPeriod = .week},
-                                .default(Text("月間")) {self.goalPeriod = .month},
+                                .default(Text("day-period")) {self.goalPeriod = .day},
+                                .default(Text("week-period")) {self.goalPeriod = .week},
+                                .default(Text("month-period")) {self.goalPeriod = .month},
                                 .cancel()
                             ]
                         )
                     }
                     HStack {
-                        Text("タイプ")
+                        Text("type-label")
                         Spacer()
                         Text("\(self.goalType.string())")
                         Text("⤵︎").foregroundColor(Color.gray)
@@ -56,7 +56,7 @@ struct AddGoalForm: View {
                         self.showingTypePicker = true
                     }.actionSheet(isPresented: $showingTypePicker) {
                         ActionSheet(
-                            title: Text("タイプ"),
+                            title: Text("type-label"),
                             message: nil,
                             buttons: [
                                 .default(Text("<")) {self.goalType = .lt},
@@ -71,7 +71,7 @@ struct AddGoalForm: View {
                     }
                     Stepper(value: self.$goal, in: 0...99) {
                         HStack {
-                            Text("食数")
+                            Text("serving-label")
                             Spacer()
                             Text("\(goal)")
                         }
@@ -88,7 +88,7 @@ struct AddGoalForm: View {
                                     .scaledToFit()
                                     .frame(width:200, height: 200)
                             } else {
-                                Text("イメージを選択").foregroundColor(Color.white)
+                                Text("image-select").foregroundColor(Color.white)
                             }
                             NavigationLink(
                                 destination: PresetImagePicker(
@@ -108,7 +108,7 @@ struct AddGoalForm: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("新規ゴールを作成").foregroundColor(Color.blue)
+                                    Text("create-goal-button").foregroundColor(Color.blue)
                                     Spacer()
                                 }
                             }
@@ -116,8 +116,8 @@ struct AddGoalForm: View {
                             isPresented: $showingAlert,
                             content: {
                                 Alert(
-                                    title: Text("不正確タイトル"),
-                                    message: Text("新規ゴールのタイトルがなくてはダメです。")
+                                    title: Text("title-alert-label"),
+                                    message: Text("title-alert-msg")
                                 )
                             }
                         )
@@ -126,14 +126,14 @@ struct AddGoalForm: View {
                             label: {
                                 HStack {
                                     Spacer()
-                                    Text("キャンセル").foregroundColor(Color.red)
+                                    Text("cancel-button").foregroundColor(Color.red)
                                     Spacer()
                                 }
                             }
                         )
                     }
                 }
-            }.navigationBarTitle("新規ゴール")
+            }.navigationTitle("new-goal-header")
         }
         .accentColor(Color.white)
         .navigationViewStyle(StackNavigationViewStyle())

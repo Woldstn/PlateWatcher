@@ -20,7 +20,7 @@ struct PresetImagePicker: View {
                 getRow(idx: i*2)
             }
         }
-        .navigationBarTitle("イメージ")
+        .navigationTitle("image-header")
     }
     
     func chooseImage(_ img: String?) {

@@ -19,13 +19,15 @@ struct ContentView: View {
                     Section(
                         header:
                             SectionHeader(
-                                title: "日間ゴール",
+                                title: "daily-goals",
                                 reset: {resetGoals(period: .day)}
-                            ).listRowInsets(EdgeInsets())
+                            )
+                            .textCase(nil)
+                            .listRowInsets(EdgeInsets())
                     ) {
                         let dayGoals = getGoals(period: .day)
                         if dayGoals.count == 0 {
-                            Text("日間ゴールはまだありません。")
+                            Text("no-daily-goal-msg")
                         } else {
                             ForEach(dayGoals, id: \.self) { goal in
                                 NutrientRow(goal: goal)
@@ -39,13 +41,15 @@ struct ContentView: View {
                     Section(
                         header:
                             SectionHeader(
-                                title: "週間ゴール",
+                                title: "weekly-goals",
                                 reset: {resetGoals(period: .week)}
-                            ).listRowInsets(EdgeInsets())
+                            )
+                            .textCase(nil)
+                            .listRowInsets(EdgeInsets())
                     ) {
                         let weekGoals = getGoals(period: .week)
                         if weekGoals.count == 0 {
-                            Text("週間ゴールはまだありません。")
+                            Text("no-weekly-goal-msg")
                         } else {
                             ForEach(weekGoals, id: \.self) { goal in
                                 NutrientRow(goal: goal)
@@ -59,13 +63,15 @@ struct ContentView: View {
                     Section(
                         header:
                             SectionHeader(
-                                title: "月間ゴール",
+                                title: "monthly-goals",
                                 reset: {resetGoals(period: .month)}
-                            ).listRowInsets(EdgeInsets())
+                            )
+                            .textCase(nil)
+                            .listRowInsets(EdgeInsets())
                     ) {
                         let monthGoals = getGoals(period: .month)
                         if monthGoals.count == 0 {
-                            Text("月間ゴールはまだありません。")
+                            Text("no-monthly-goal-msg")
                         } else {
                             ForEach(monthGoals, id: \.self) { goal in
                                 NutrientRow(goal: goal)
@@ -77,7 +83,7 @@ struct ContentView: View {
                         }
                     }
                 }.listStyle(PlainListStyle())
-            }.navigationBarTitle("飲食記録")
+            }.navigationTitle("PlateWatcher")
         }
         .accentColor(Color.white)
         .navigationViewStyle(StackNavigationViewStyle())
@@ -119,7 +125,8 @@ struct ContentView_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let dateData = DateData(context: context)
         return Group {
-            ContentView(dateData: dateData).environment(\.managedObjectContext, context)
+            ContentView(dateData: dateData)
+                .environment(\.managedObjectContext, context)
             ContentView(dateData: dateData)
                 .environment(\.managedObjectContext, context)
                 .environment(\.colorScheme, .dark)

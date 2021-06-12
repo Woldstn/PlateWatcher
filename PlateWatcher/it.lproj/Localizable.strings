@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  PlateWatcher
+
+  Created by Zachary Pierog on 2021/06/12.
+  Copyright © 2021 Zachary Pierog. All rights reserved.
+*/
+
+"PlateWatcher" = "PlateWatcher";
+"daily-goals" = "Goal Quotidiani";
+"weekly-goals" = "Goal Settimanali";
+"monthly-goals" = "Goal Mensili";
+"no-daily-goal-msg" = "Non hai ancora dei goal quotidiani.";
+"no-weekly-goal-msg" = "Non hai ancora dei goal settimanali.";
+"no-monthly-goal-msg" = "Non hai ancora dei goal mensili.";
+"new-goal-header" = "Nuovo Goal";
+"title-label" = "Titolo";
+"period-label" = "Periodo";
+"day-period" = "Quotidiano";
+"week-period" = "Settimanale";
+"month-period" = "Mensile";
+"type-label" = "Tipo";
+"serving-label" = "Servings";
+"image-select" = "Sceglia un'immagine";
+"title-alert-label" = "Nessuno titolo";
+"title-alert-msg" = "Un titolo è necessario per nuovi goal.";
+"create-goal-button" = "Cria nuovo goal";
+"cancel-button" = "Annulla";
+"image-header" = "Immagine";
+"chart-header" = "Grafico";
+"settings-header" = "Impostazioni";
+"start-of-week" = "Inizia della settimana";
+"sunday" = "Domenica";
+"monday" = "Lunedì";
+"tuesday" = "Martedì";
+"wednesday" = "Mercoledì";
+"thursday" = "Giovedì";
+"friday" = "Venerdì";
+"saturday" = "Sabato";
+"start-of-month" = "Inizia del mese";
+"data-period-label" = "Tenere data per:";
+"one-week" = "Una settimana";
+"two-weeks" = "Due settimane";
+"one-month" = "Un mese";
+"six-months" = "Sei mesi";
+"one-year" = "Un anno";
+"two-years" = "Due anni";
+"forever" = "Per sempre";
+"save-changes" = "Salva modifiche";
+"save-alert-title" = "Successo";
+"save-alert-msg" = "Impostazioni si sono salvato con successo.";
+"discard-changes" = "Annulla modifiche";
+"alert-title" = "Avviso";
+"reset-settings" = "Inizzializza impostiazioni";
+"reset-alert" = "Impostazioni si saranno ritornare ai valori predefiniti. Continua?";
+"reset-settings-button" = "Resetta";
+"delete-data" = "Cancella tutti i dati";
+"delete-data-button" = "Cancella";
+"delete-data-alert" = "Tutti i dati salvati si saranno cancellare. Continua?";
+"reset-button" = "Resetta";

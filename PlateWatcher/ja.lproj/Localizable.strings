@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  PlateWatcher
+
+  Created by Zachary Pierog on 2021/06/12.
+  Copyright © 2021 Zachary Pierog. All rights reserved.
+*/
+
+"PlateWatcher" = "飲食記録";
+"daily-goals" = "日間ゴール";
+"weekly-goals" = "週間ゴール";
+"monthly-goals" = "月間ゴール";
+"no-daily-goal-msg" = "日間ゴールはまだありません。";
+"no-weekly-goal-msg" = "週間ゴールはまだありません。";
+"no-monthly-goal-msg" = "月間ゴールはまだありません。";
+"new-goal-header" = "新規ゴール";
+"title-label" = "タイトル";
+"period-label" = "期間";
+"day-period" = "日間";
+"week-period" = "週間";
+"month-period" = "月間";
+"type-label" = "タイプ";
+"serving-label" = "食数";
+"image-select" = "イメージを選択";
+"title-alert-label" = "不正確タイトル";
+"title-alert-msg" = "新規ゴールにタイトルをつけなくてはダメです。";
+"create-goal-button" = "新規ゴールを作成";
+"cancel-button" = "キャンセル";
+"image-header" = "イメージ";
+"chart-header" = "チャート";
+"settings-header" = "設定";
+"start-of-week" = "週の初曜日";
+"sunday" = "日曜日";
+"monday" = "月曜日";
+"tuesday" = "火曜日";
+"wednesday" = "水曜日";
+"thursday" = "木曜日";
+"friday" = "金曜日";
+"saturday" = "土曜日";
+"start-of-month" = "月の初日";
+"data-period-label" = "データ保存期間";
+"one-week" = "1週間";
+"two-weeks" = "2週間";
+"one-month" = "1ヶ月";
+"six-months" = "6ヶ月";
+"one-year" = "1年間";
+"two-years" = "2年間";
+"forever" = "永久に";
+"save-changes" = "変更を保存";
+"save-alert-title" = "成功";
+"save-alert-msg" = "設定は保存できました。";
+"discard-changes" = "変更を廃棄";
+"alert-title" = "注意";
+"reset-settings" = "設定を初期化";
+"reset-alert" = "設定は初期化されます。よろしいでしょうか？";
+"reset-settings-button" = "リセット";
+"delete-data" = "データを削除";
+"delete-data-button" = "削除";
+"delete-data-alert" = "保存されたデータは全部削除されます。よろしいでしょうか？";
+"reset-button" = "リセット";
