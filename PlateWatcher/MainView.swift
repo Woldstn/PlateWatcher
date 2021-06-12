@@ -89,6 +89,46 @@ struct MainView: View {
         )
     }
     
+    func deleteDateData(dataPeriod: Int) {
+        if let period = DataPeriod.init(rawValue: dataPeriod) {
+            let interval: Int?
+            switch period {
+            case .oneWeek:
+                interval = -3600 * 24 * 7
+                break
+            case .twoWeeks:
+                interval = -3600 * 24 * 14
+                break
+            case .oneMonth:
+                interval = -3600 * 24 * 30
+                break
+            case .sixMonths:
+                interval = -3600 * 24 * 30 * 6
+                break
+            case .oneYear:
+                interval = -3600 * 24 * 365
+                break
+            case .twoYears:
+                interval = -3600 * 24 * 365 * 2
+                break
+            case .forever:
+                interval = nil
+                break
+            }
+            if interval != nil {
+                let oldData = dateData.filter {
+                    Date().distance(to: $0.datetime ?? Date()) < TimeInterval(interval!)
+                }
+                for date in oldData { managedObjectContext.delete(date) }
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print("データは削除できませんでした。\n\(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
     func copyGoalData(_ sourceGoal: Goal) -> Goal {
         let newGoal = Goal(context: managedObjectContext)
         newGoal.title = sourceGoal.title
