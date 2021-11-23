@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct NutrientRow: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @State var labelColor = Color.blue
     @ObservedObject var goal: Goal
     
@@ -57,6 +58,7 @@ struct NutrientRow: View {
         .padding(.all, 5)
         .onReceive(goal.objectWillChange, perform: { _ in
             editTextColor(goalType: goalType, goalQty: goal.goal)
+            saveContext(errorMsg: "食数は変更できませんでした。")
         })
     }
     
@@ -80,6 +82,14 @@ struct NutrientRow: View {
         case .ne:
             labelColor = goal.servings != goalQty ? critPass : critFail
             break
+        }
+    }
+    
+    func saveContext(errorMsg: String) {
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("\(errorMsg)\n\(error.localizedDescription)")
         }
     }
 }

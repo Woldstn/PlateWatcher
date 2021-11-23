@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E07A1042674DEE500BAE108 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E07A1062674DEE500BAE108 /* InfoPlist.strings */; };
 		3E082E3C24E4EB57002583A2 /* AddGoalForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E082E3B24E4EB57002583A2 /* AddGoalForm.swift */; };
 		3E082E3E24E550B4002583A2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E082E3D24E550B4002583A2 /* ImagePicker.swift */; };
 		3E340E3A24E2AAFE0044100D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E340E3924E2AAFE0044100D /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 		3E6DC969266660F400981F3A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6DC968266660F400981F3A /* MainView.swift */; };
 		3E87D85B266B284300D70312 /* GoalGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87D85A266B284300D70312 /* GoalGraph.swift */; };
 		3E8EA489265A47CA00E08A98 /* GoalIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EA488265A47CA00E08A98 /* GoalIcon.swift */; };
+		3E9729CD274B16C300E7E4A9 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9729CC274B16C200E7E4A9 /* Data.swift */; };
 		3EA4E352267441E9005F8238 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EA4E354267441E9005F8238 /* Localizable.strings */; };
 		3EC32BDA26617CF0003C4A36 /* PresetImagePicker_v2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC32BD926617CF0003C4A36 /* PresetImagePicker_v2.swift */; };
 		3EC8867624E63D740026789D /* PresetImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC8867524E63D740026789D /* PresetImagePicker.swift */; };
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E07A1052674DEE500BAE108 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E07A1072674DEEB00BAE108 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E07A1082674DEEC00BAE108 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E082E3B24E4EB57002583A2 /* AddGoalForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalForm.swift; sourceTree = "<group>"; };
 		3E082E3D24E550B4002583A2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3E340E3624E2AAFE0044100D /* PlateWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlateWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +78,7 @@
 		3E84FB2926744A57006BEFE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E87D85A266B284300D70312 /* GoalGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalGraph.swift; sourceTree = "<group>"; };
 		3E8EA488265A47CA00E08A98 /* GoalIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalIcon.swift; sourceTree = "<group>"; };
+		3E9729CC274B16C200E7E4A9 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3EA4E34E26743D5F005F8238 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3EA4E34F26743D6A005F8238 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = it; path = it.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3EA4E353267441E9005F8238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -172,10 +178,12 @@
 				3E340E4224E2AB040044100D /* Assets.xcassets */,
 				3E340E4724E2AB040044100D /* LaunchScreen.storyboard */,
 				3E340E4A24E2AB040044100D /* Info.plist */,
+				3E07A1062674DEE500BAE108 /* InfoPlist.strings */,
 				3E340E4424E2AB040044100D /* Preview Content */,
 				3E8EA488265A47CA00E08A98 /* GoalIcon.swift */,
 				3E6DC968266660F400981F3A /* MainView.swift */,
 				3EA4E354267441E9005F8238 /* Localizable.strings */,
+				3E9729CC274B16C200E7E4A9 /* Data.swift */,
 			);
 			path = PlateWatcher;
 			sourceTree = "<group>";
@@ -331,6 +339,7 @@
 				3EA4E352267441E9005F8238 /* Localizable.strings in Resources */,
 				3E340E4624E2AB040044100D /* Preview Assets.xcassets in Resources */,
 				3E340E4324E2AB040044100D /* Assets.xcassets in Resources */,
+				3E07A1042674DEE500BAE108 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +377,7 @@
 				3E6DC969266660F400981F3A /* MainView.swift in Sources */,
 				3EE815A426619D0F00BDEE1A /* PlateWatcher.xcdatamodeld in Sources */,
 				3E8EA489265A47CA00E08A98 /* GoalIcon.swift in Sources */,
+				3E9729CD274B16C300E7E4A9 /* Data.swift in Sources */,
 				3E082E3E24E550B4002583A2 /* ImagePicker.swift in Sources */,
 				3E87D85B266B284300D70312 /* GoalGraph.swift in Sources */,
 				3EFB18062658D17300A67635 /* Enums.swift in Sources */,
@@ -407,6 +417,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3E07A1062674DEE500BAE108 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E07A1052674DEE500BAE108 /* en */,
+				3E07A1072674DEEB00BAE108 /* it */,
+				3E07A1082674DEEC00BAE108 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3E340E4724E2AB040044100D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

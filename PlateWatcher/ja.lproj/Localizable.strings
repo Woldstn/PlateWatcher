@@ -58,3 +58,5 @@
 "delete-data-button" = "削除";
 "delete-data-alert" = "保存されたデータは全部削除されます。よろしいでしょうか？";
 "reset-button" = "リセット";
+"Choose goal" = "ゴールを選択";
+"Date Range" = "期間";

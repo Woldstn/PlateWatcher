@@ -19,7 +19,6 @@ struct GraphDims {
 
 struct DataBar: View {
     let critPass: Bool
-    let graph: GraphDims
     
     var body: some View {
         Rectangle().opacity(0).background(background)
@@ -72,7 +71,7 @@ struct DataBar: View {
 struct GoalGraph: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var data: [Int]
-    @State var showDataTooltip:Bool = false
+    @State var showDataTooltip: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -147,7 +146,7 @@ struct GoalGraph: View {
             HStack(alignment: .bottom) {
                 Spacer()
                 ForEach(data, id: \.self) { val in
-                    DataBar(critPass: true, graph: graph)
+                    DataBar(critPass: true)
                         .frame(width: barWidth, height: CGFloat(val) * unitHeight)
                     Spacer()
                 }

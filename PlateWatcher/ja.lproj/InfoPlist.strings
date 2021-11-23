@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  PlateWatcher
+
+  Created by Zachary Pierog on 2021/06/12.
+  Copyright © 2021 Zachary Pierog. All rights reserved.
+*/
+CFBundleDisplayName = "飲食記録";

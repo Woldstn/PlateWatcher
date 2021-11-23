@@ -6,11 +6,12 @@
 //  Copyright © 2020 Zachary Pierog. All rights reserved.
 //
 
+import AVFoundation
 import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    let dateData: DateData
+    let parent: MainView
     
     var body: some View {
         NavigationView {
@@ -82,7 +83,7 @@ struct ContentView: View {
                             .listRowInsets(EdgeInsets())
                         }
                     }
-                }.listStyle(PlainListStyle())
+                }.listStyle(GroupedListStyle())
             }.navigationTitle("PlateWatcher")
         }
         .accentColor(Color.white)
@@ -93,41 +94,34 @@ struct ContentView: View {
         for goal in getGoals(period: period) {
             goal.servings = 0
         }
-        saveContext(errorMsg: "ゴールはリセットできませんでした。")
+        AudioServicesPlaySystemSound(1123)
+        saveContext(context: managedObjectContext, errorMsg: "ゴールはリセットできませんでした。")
     }
     
     func deleteGoals(at offsets: IndexSet, goals: Array<Goal>) {
         for i in offsets {
             managedObjectContext.delete(goals[i])
         }
-        saveContext(errorMsg: "ゴールは削除できませんでした。")
+        saveContext(context: managedObjectContext, errorMsg: "ゴールは削除できませんでした。")
     }
     
     func getGoals(period: GoalPeriod) -> Array<Goal> {
-        if let goals = dateData.goals {
+        if let goals = getTodayData(dateData: parent.dateData, context: managedObjectContext).goals {
             let pGoals = goals.filter { ($0 as! Goal).goalPeriod == period.rawValue }
             return pGoals.map { $0 as! Goal }
         }
         return []
-    }
-
-    func saveContext(errorMsg: String) {
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print("\(errorMsg)\n\(error.localizedDescription)")
-        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let dateData = DateData(context: context)
+        let parent = MainView()
         return Group {
-            ContentView(dateData: dateData)
+            ContentView(parent: parent)
                 .environment(\.managedObjectContext, context)
-            ContentView(dateData: dateData)
+            ContentView(parent: parent)
                 .environment(\.managedObjectContext, context)
                 .environment(\.colorScheme, .dark)
         }

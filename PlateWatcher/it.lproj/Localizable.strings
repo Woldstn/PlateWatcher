@@ -58,3 +58,5 @@
 "delete-data-button" = "Cancella";
 "delete-data-alert" = "Tutti i dati salvati si saranno cancellare. Continua?";
 "reset-button" = "Resetta";
+"Choose goal" = "Scegli goal";
+"Date Range" = "Intervallo di Date";

@@ -5,13 +5,11 @@
 //  Created by Zachary Pierog on 2020/08/13.
 //  Copyright © 2020 Zachary Pierog. All rights reserved.
 //
-
 import SwiftUI
 
 struct AddGoalForm: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     let parent: MainView
-    let dateData: DateData
     
     @State private var title: String = ""
     @State private var goalPeriod: GoalPeriod = .day
@@ -27,7 +25,7 @@ struct AddGoalForm: View {
         NavigationView {
             VStack (spacing: 0) {
                 Form {
-                    TextField("title-label", text: $title)
+                    TextField(LocalizedStringKey("title-label"),text: $title)
                     HStack {
                         Text("period-label")
                         Spacer()
@@ -150,7 +148,7 @@ struct AddGoalForm: View {
             newGoal.goalPeriod = goalPeriod.rawValue
             newGoal.goalType = goalType.rawValue
             newGoal.image = image == "" ? nil : image
-            dateData.addToGoals(newGoal)
+            getTodayData(dateData: parent.dateData, context: managedObjectContext).addToGoals(newGoal)
             
             returnHomeTab()
         }
@@ -163,18 +161,17 @@ struct AddGoalForm: View {
         goal = 0
         image = nil
         
+        saveContext(context: managedObjectContext, errorMsg: "ゴールは保存できませんでした。")
         parent.selectedTab = "home"
     }
 }
 
 struct AddGoalForm_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let dateData = DateData(context: context)
         let mainView = MainView()
         Group {
-            AddGoalForm(parent: mainView, dateData: dateData)
-            AddGoalForm(parent: mainView, dateData: dateData).environment(\.colorScheme, .dark)
+            AddGoalForm(parent: mainView)
+            AddGoalForm(parent: mainView).environment(\.colorScheme, .dark)
         }
     }
 }

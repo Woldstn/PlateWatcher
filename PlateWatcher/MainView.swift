@@ -64,13 +64,11 @@ struct MainView: View {
     ) var dateData: FetchedResults<DateData>
     
     var body: some View {
-        var todayData = getTodayData()
-        
         TabView(selection: $selectedTab) {
-            ContentView(dateData: todayData).tabItem {
+            ContentView(parent: self).tabItem {
                 Image(systemName: "house.fill")
             }.tag("home")
-            AddGoalForm(parent: self, dateData: todayData).tabItem {
+            AddGoalForm(parent: self).tabItem {
                 Image(systemName: "plus.circle.fill")
             }.tag("new goal")
             GraphView().tabItem {
@@ -79,125 +77,7 @@ struct MainView: View {
             SettingsView(parent: self).tabItem {
                 Image(systemName: "gearshape.fill")
             }.tag("settings")
-        }.onReceive(
-            NotificationCenter.default.publisher(
-                for: UIApplication.willEnterForegroundNotification
-            ),
-            perform: { _ in
-                todayData = getTodayData()
-            }
-        )
-    }
-    
-    func deleteDateData(dataPeriod: Int) {
-        if let period = DataPeriod.init(rawValue: dataPeriod) {
-            let interval: Int?
-            switch period {
-            case .oneWeek:
-                interval = -3600 * 24 * 7
-                break
-            case .twoWeeks:
-                interval = -3600 * 24 * 14
-                break
-            case .oneMonth:
-                interval = -3600 * 24 * 30
-                break
-            case .sixMonths:
-                interval = -3600 * 24 * 30 * 6
-                break
-            case .oneYear:
-                interval = -3600 * 24 * 365
-                break
-            case .twoYears:
-                interval = -3600 * 24 * 365 * 2
-                break
-            case .forever:
-                interval = nil
-                break
-            }
-            if interval != nil {
-                let oldData = dateData.filter {
-                    Date().distance(to: $0.datetime ?? Date()) < TimeInterval(interval!)
-                }
-                for date in oldData { managedObjectContext.delete(date) }
-                do {
-                    try managedObjectContext.save()
-                } catch {
-                    print("データは削除できませんでした。\n\(error.localizedDescription)")
-                }
-            }
         }
-    }
-    
-    func copyGoalData(_ sourceGoal: Goal) -> Goal {
-        let newGoal = Goal(context: managedObjectContext)
-        newGoal.title = sourceGoal.title
-        newGoal.goal = sourceGoal.goal
-        newGoal.goalPeriod = sourceGoal.goalPeriod
-        newGoal.goalType = sourceGoal.goalType
-        newGoal.image = sourceGoal.image
-        newGoal.servings = sourceGoal.servings
-        return newGoal
-    }
-    
-    func newDateDataFromPrev(_ sourceDateData: DateData) -> DateData {
-        // Create new DateData entity and set the date to today
-        let newDateData = DateData(context: managedObjectContext)
-        newDateData.datetime = Calendar.current.startOfDay(for: Date())
-        // Copy each of the Goals from the source data
-        for goal in (sourceDateData as DateData).goals ?? [] {
-            if let sourceGoal = goal as? Goal {
-                let newGoal = copyGoalData(sourceGoal)
-                // Reset the servings attribute based on the goal period
-                switch GoalPeriod(rawValue: newGoal.goalPeriod) {
-                case .day:
-                    newGoal.servings = 0
-                    break
-                case .week:
-                    if let sourceDate = sourceDateData.datetime {
-                        let sourceWeek = Calendar.current.startOfWeek(for: sourceDate)
-                        let thisWeek = Calendar.current.startOfWeek(for: Date())
-                        if sourceWeek == thisWeek {
-                            newGoal.servings = 0
-                        }
-                    }
-                    break
-                case .month:
-                    if let sourceDate = sourceDateData.datetime {
-                        let sourceMonth = Calendar.current.startOfMonth(for: sourceDate)
-                        let thisMonth = Calendar.current.startOfMonth(for: Date())
-                        if sourceMonth == thisMonth {
-                            newGoal.servings = 0
-                        }
-                    }
-                    break
-                case .none:
-                    break
-                }
-                // Add the new Goal to the new DateData
-                newDateData.addToGoals(newGoal)
-            }
-        }
-        // Return the new DateData
-        return newDateData
-    }
-    
-    func getTodayData() -> DateData {
-        if let lastDateData = dateData.first {
-            // Assign today's date and the date of the last data to variables
-            let lastDate = Calendar.current.startOfDay(for: lastDateData.datetime!)
-            let todayDate = Calendar.current.startOfDay(for: Date())
-            // If the dates are the same, use the most recent data
-            if lastDate == todayDate {
-                return lastDateData
-            }
-            // If they are different, copy the most recent data
-            return newDateDataFromPrev(lastDateData)
-        }
-        // If no DateData was found, return an empty DateData object
-        let dateObj = DateData(context: managedObjectContext)
-        dateObj.datetime = Calendar.current.startOfDay(for: Date())
-        return dateObj
     }
 }
 

@@ -58,3 +58,5 @@
 "delete-data-button" = "Delete";
 "delete-data-alert" = "All saved data will be deleted. Proceed?";
 "reset-button" = "Reset";
+"Choose goal" = "Choose goal";
+"Date Range" = "Date Range";
